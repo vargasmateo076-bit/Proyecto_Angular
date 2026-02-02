@@ -1,0 +1,53 @@
+.tech-container {
+  min-height: 100vh;
+  background: #0f172a; // Azul oscuro espacial
+  color: white;
+  font-family: 'Inter', sans-serif;
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 5%;
+    background: rgba(15, 23, 42, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid #1e293b;
+    position: sticky;
+    top: 0;
+  }
+
+  .logo { font-weight: bold; font-size: 1.5rem; color: #38bdf8; }
+
+  .hero {
+    text-align: center;
+    padding: 4rem 1rem;
+    background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+    h1 { font-size: 3rem; margin-bottom: 1rem; }
+  }
+
+  .news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 2rem 5%;
+  }
+
+  .card {
+    background: #1e293b;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    transition: transform 0.3s ease;
+    &:hover { transform: translateY(-5px); border-color: #38bdf8; }
+    .tag { color: #38bdf8; font-size: 0.8rem; font-weight: bold; margin-bottom: 0.5rem; }
+  }
+}
+
+.btn-admin, .btn-more {
+  background: #38bdf8;
+  color: #0f172a;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}

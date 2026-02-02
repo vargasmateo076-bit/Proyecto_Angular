@@ -1,0 +1,101 @@
+.login-wrapper {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+  font-family: 'Inter', sans-serif;
+
+  .login-card {
+    background: rgba(30, 41, 59, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 3rem;
+    border-radius: 20px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+
+  .login-header {
+    margin-bottom: 2.5rem;
+    h1 { color: #fff; font-size: 1.8rem; margin: 10px 0 5px; }
+    p { color: #94a3b8; font-size: 0.9rem; }
+    .icon-box {
+      font-size: 2.5rem;
+      background: rgba(56, 189, 248, 0.1);
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+  }
+
+  .input-group {
+    text-align: left;
+    margin-bottom: 1.5rem;
+    label { color: #cbd5e1; font-size: 0.85rem; font-weight: 500; display: block; margin-bottom: 8px; }
+    
+    .input-wrapper {
+      position: relative;
+      input {
+        width: 100%;
+        background: #0f172a;
+        border: 1px solid #334155;
+        padding: 12px 15px;
+        border-radius: 8px;
+        color: white;
+        font-size: 1rem;
+        transition: all 0.3s;
+        box-sizing: border-box;
+
+        &:focus {
+          outline: none;
+          border-color: #38bdf8;
+          box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+      }
+    }
+  }
+
+  .btn-glow {
+    width: 100%;
+    background: #38bdf8;
+    color: #0f172a;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 1rem;
+
+    &:hover {
+      background: #7dd3fc;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px -5px rgba(56, 189, 248, 0.5);
+    }
+  }
+
+  .error-msg {
+    color: #fb7185;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    background: rgba(251, 113, 133, 0.1);
+    padding: 8px;
+    border-radius: 6px;
+  }
+
+  .link-back {
+    display: inline-block;
+    margin-top: 2rem;
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.2s;
+    &:hover { color: #38bdf8; }
+  }
+}

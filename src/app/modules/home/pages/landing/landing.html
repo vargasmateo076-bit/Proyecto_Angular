@@ -1,0 +1,24 @@
+<div class="tech-container">
+  <nav class="navbar">
+    <span class="logo">TechPortal 2026</span>
+    <button routerLink="/auth/login" class="btn-admin">Acceso Admin</button>
+  </nav>
+
+  <header class="hero">
+    <h1>Lo último en Innovación</h1>
+    <p>Explorando la frontera de la IA, Angular y el Hardware Cuántico.</p>
+  </header>
+
+  <section class="news-grid">
+  @for (post of articulos(); track post.titulo) {
+    <div class="card">
+      <div class="tag">{{ post.tag }}</div>
+      <h3>{{ post.titulo }}</h3>
+      <p>{{ post.resumen }}</p>
+      <button class="btn-more">Leer más</button>
+    </div>
+  } @empty {
+    <p>No hay noticias tecnológicas hoy...</p>
+  }
+</section>
+</div>

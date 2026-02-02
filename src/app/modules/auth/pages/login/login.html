@@ -1,0 +1,41 @@
+<div class="login-wrapper">
+  <div class="login-card">
+    <div class="login-header">
+      <div class="icon-box">
+        <span class="tech-icon">🔒</span>
+      </div>
+      <h1>Panel de Control</h1>
+      <p>Ingresa tus credenciales de administrador</p>
+    </div>
+
+    <div class="login-form">
+      <div class="input-group">
+        <label>Usuario</label>
+        <div class="input-wrapper">
+          <input type="text" [(ngModel)]="userInput" placeholder="Ej: admin" autocomplete="off">
+          <span class="focus-border"></span>
+        </div>
+      </div>
+
+      <div class="input-group">
+        <label>Contraseña</label>
+        <div class="input-wrapper">
+          <input type="password" [(ngModel)]="passInput" placeholder="••••••••">
+          <span class="focus-border"></span>
+        </div>
+      </div>
+
+      <button (click)="onLogin()" class="btn-glow">
+        <span>INICIAR SESIÓN</span>
+      </button>
+
+      <p class="error-msg" *ngIf="errorMessage()">
+        {{ errorMessage() }}
+      </p>
+    </div>
+
+    <div class="login-footer">
+      <a routerLink="/" class="link-back">← Volver al Portal de Noticias</a>
+    </div>
+  </div>
+</div>
