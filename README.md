@@ -1,5 +1,6 @@
 1. El Arranque
 Cuando ejecutas ng serve y abres el navegador:
+NOTA**** tienes que ejecutar el npm install sobre la carpeta***
 
 main.ts: Es la llave de encendido. Arranca la aplicación usando el componente AppComponent
 
