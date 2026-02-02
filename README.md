@@ -1,59 +1,60 @@
-# Frontend
+1. El Arranque
+Cuando ejecutas ng serve y abres el navegador:
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.0.1.
+main.ts: Es la llave de encendido. Arranca la aplicación usando el componente AppComponent
 
-## Development server
+app.routes.ts: Actúa como el mapa.
 
-To start a local development server, run:
+app.html: Tiene el <router-outlet>, que es el marco vacío donde Angular "pega" la Landing.
 
-```bash
-ng serve
-```
+2. La Visualización (Landing Page)
+El usuario ve las noticias.
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+El Servicio (NewsService): Es el cerebro central. Nace cuando arranca la app y guarda la lista de noticias en un Signal (una caja fuerte reactiva).
 
-## Code scaffolding
+La Landing (LandingComponent):
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Inyecta el servicio (inject(NewsService)).
 
-```bash
-ng generate component component-name
-```
+Pide la lista de noticias (this.service.noticias).
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+En el HTML, el bucle (@for o *ngFor) abre la caja fuerte (articulos()) y "pinta" una tarjeta por cada noticia.
 
-```bash
-ng generate --help
-```
+3. La Navegación y Seguridad (Auth Guard)
+El usuario intenta entrar a la administración.
 
-## Building
+Clic en el botón "Login" -> El Router cambia la URL a /auth/login.
 
-To build the project run:
+El Login: El usuario escribe "admin" y "1234".
 
-```bash
-ng build
-```
+AuthService: Verifica la clave. Si es correcta:
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Pone su señal isLoggedIn en true.
 
-## Running unit tests
+Guarda un token falso en el navegador (localStorage).
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+El Router: Intenta llevarte a /admin/dashboard.
 
-```bash
-ng test
-```
+authGuard: Es el guardia de seguridad. Antes de dejarte entrar al Dashboard, corre y le pregunta al AuthService: "¿Este usuario está logueado?". Como ahora es true, levanta la barrera y te deja pasar.
 
-## Running end-to-end tests
+4. La Creación (Dashboard)
+El administrador escribe una nueva noticia sobre "Robótica".
 
-For end-to-end (e2e) testing, run:
+El Formulario: Usaste [(ngModel)], lo que crea un puente bidireccional. Lo que escribes en el input se guarda instantáneamente en la variable nuevaNoticia del archivo .ts.
 
-```bash
-ng e2e
-```
+El botón "Publicar": Al hacer clic, ejecuta la función publicar().
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+La Magia del Servicio:
 
-## Additional Resources
+El componente Dashboard llama a NewsService.agregarNoticia(datos).
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+El Servicio toma el Signal de noticias y lo actualiza (update), poniendo la nueva noticia al principio de la lista.
+
+5. La Reactividad (El cierre del ciclo)
+Aquí es donde Angular brilla.
+
+El administrador cierra sesión y vuelve a la Landing.
+
+Sin recargar la página, la Landing (que sigue "escuchando" al mismo NewsService) nota que el Signal cambió.
+
+Automáticamente, Angular repinta el HTML y  La noticia de "Robótica" aparece ahí.
