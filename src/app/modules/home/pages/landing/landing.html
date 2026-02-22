@@ -24,10 +24,7 @@
       Las nuevas arquitecturas híbridas prometen multiplicar
       el rendimiento de la inteligencia artificial empresarial.
     </p>
-    <button class="btn-cyan"
-  (click)="verDetalle(principal()?.id)">
-  Leer artículo completo
-</button>
+    <button class="btn-cyan">Leer más</button>
   </div>
 
   <!-- NOTICIAS -->
@@ -37,17 +34,54 @@
   <div class="mini-card" *ngFor="let item of secundarias()">
     <h3>{{ item.titulo }}</h3>
     <p>{{ item.resumen }}</p>
-    <button class="btn-cyan" (click)="verDetalle(item.id)">Leer más</button>
   </div>
 </div>
 
   <!-- VIDEOS -->
   <h2>Videos Destacados</h2>
 
-  <div class="news-grid">
-    <div class="mini-card">Angular 19 Signals</div>
-    <div class="mini-card">Deep Learning 2026</div>
-    <div class="mini-card">Robots Autónomos</div>
+  <div class="video-grid">
+    
+    
+
+   <div class="video-card">
+    <iframe 
+      src="https://www.youtube.com/embed/JhHMJCUmq28"
+      title="Quantum Computing"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+    <h3>Introducción a la Computación Cuántica</h3>
+  </div>
+
+  <div class="video-card">
+    <iframe 
+      src="https://www.youtube.com/embed/GwIo3gDZCVQ"
+      title="Machine Learning"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+    <h3>Machine Learning en 10 minutos</h3>
+  </div>
+
+  <div class="video-card">
+    <iframe 
+      src="https://www.youtube.com/embed/M988_fsOSWo"
+      title="Cloud Computing"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+    <h3>Cloud Computing & Edge AI</h3>
+  </div>
+
+  <div class="video-card">
+    <iframe 
+      src="https://www.youtube.com/embed/-e1_QhJ1EhQ"
+      title="Robotics"
+      frameborder="0"
+      allowfullscreen>
+    </iframe>
+    <h3>Robots Autónomos Avanzados</h3>
   </div>
 
   <!-- NEWSLETTER -->
@@ -59,39 +93,7 @@
       <input type="email" placeholder="Correo corporativo">
       <button class="btn-cyan">Suscribirse</button>
     </div>
-  </div>
-
-  <section class="cards">
-
-    <div class="card">
-      <h3>🤖 Inteligencia Artificial</h3>
-      <p>
-        Descubre cómo la IA está revolucionando
-        el desarrollo de software moderno.
-      </p>
-      <button class="btn-card">Leer más</button>
-    </div>
-
-    <div class="card">
-      <h3>🅰 Angular 18</h3>
-      <p>
-        Nuevas mejoras en rendimiento y arquitectura
-        para aplicaciones escalables.
-      </p>
-      <button class="btn-card">Leer más</button>
-    </div>
-
-    <div class="card">
-      <h3>⚛ Computación Cuántica</h3>
-      <p>
-        El futuro del hardware y el procesamiento
-        de datos a gran escala.
-      </p>
-      <button class="btn-card">Leer más</button>
-    </div>
-
-  </section>
-  
+  </div>  
 </div>
 
     
