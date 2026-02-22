@@ -1,36 +1,54 @@
 import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // <--- VITAL para el [(ngModel)]
-import { Router, RouterLink } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth'; // Revisa que la ruta sea correcta
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../../core/services/auth.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink], // <--- Agregamos FormsModule aquí
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.html',
-  styleUrl: './login.less'
+  styleUrls: ['./login.less']
 })
 export class LoginComponent {
-  // Inyectamos las herramientas
-  private authService = inject(AuthService);
+
+  private auth = inject(AuthService);
   private router = inject(Router);
 
-  // Variables para capturar lo que el usuario escribe
-  userInput = '';
-  passInput = '';
-  errorMessage = signal(''); // Usamos un signal para el error
+  username = '';
+  password = '';
+  error = signal('');
 
-  onLogin() {
-    // Llamamos al método login de nuestro servicio
-    const success = this.authService.login(this.userInput, this.passInput);
+  loginMode: 'admin' | 'user' = 'admin';
+
+  cambiarModo() {
+    this.loginMode = this.loginMode === 'admin' ? 'user' : 'admin';
+    this.error.set('');
+    this.username = '';
+    this.password = '';
+  }
+
+  login() {
+
+    const success = this.auth.login(
+      this.username,
+      this.password,
+      this.loginMode
+    );
 
     if (success) {
-      // Si todo sale bien, lo mandamos al Dashboard
-      this.router.navigate(['/admin/dashboard']);
-    } else {
-      // Si falla, mostramos el error
-      this.errorMessage.set('Usuario o clave incorrectos (admin / 1234)');
+
+      if (this.loginMode === 'admin') {
+        this.router.navigate(['/admin/dashboard']);
+      } else {
+        this.router.navigate(['/home']); 
+      }
+
+      return;
     }
+
+    this.error.set('Credenciales incorrectas');
   }
+
 }

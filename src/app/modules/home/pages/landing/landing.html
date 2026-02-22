@@ -1,24 +1,97 @@
-<div class="tech-container">
-  <nav class="navbar">
-    <span class="logo">TechPortal 2026</span>
-    <button routerLink="/auth/login" class="btn-admin">Acceso Admin</button>
-  </nav>
+  <div class="user-view">
+    <div class="user-container">
+  <header class="navbar">
+    <div class="logo">TechPortal 20</div>
+    <div class="nav-right">
+      <span class="user-name">
+        Bienvenido, <strong>{{ auth.getUsername() }}</strong></span>
 
-  <header class="hero">
-    <h1>Lo último en Innovación</h1>
-    <p>Explorando la frontera de la IA, Angular y el Hardware Cuántico.</p>
+      <button class="btn-logout" (click)="logout()">
+      Cerrar Sesión</button>
+    </div>
   </header>
 
-  <section class="news-grid">
-  @for (post of articulos(); track post.titulo) {
-    <div class="card">
-      <div class="tag">{{ post.tag }}</div>
-      <h3>{{ post.titulo }}</h3>
-      <p>{{ post.resumen }}</p>
-      <button class="btn-more">Leer más</button>
-    </div>
-  } @empty {
-    <p>No hay noticias tecnológicas hoy...</p>
-  }
-</section>
+  <p class="subtitle">
+    Lo último en Innovación: Explorando la frontera de la IA,
+    Angular y el Hardware Cuántico.
+  </p>
+
+  <!-- HERO -->
+  <div class="hero-card">
+    <div class="card-meta">WEB · 12 Feb 2026 </div>
+    <h1>Quantum Chips marcarán la próxima era de la computación</h1>
+    <p>
+      Las nuevas arquitecturas híbridas prometen multiplicar
+      el rendimiento de la inteligencia artificial empresarial.
+    </p>
+    <button class="btn-cyan"
+  (click)="verDetalle(principal()?.id)">
+  Leer artículo completo
+</button>
+  </div>
+
+  <!-- NOTICIAS -->
+ <h2>Últimas Noticias</h2>
+
+<div class="news-grid">
+  <div class="mini-card" *ngFor="let item of secundarias()">
+    <h3>{{ item.titulo }}</h3>
+    <p>{{ item.resumen }}</p>
+    <button class="btn-cyan" (click)="verDetalle(item.id)">Leer más</button>
+  </div>
 </div>
+
+  <!-- VIDEOS -->
+  <h2>Videos Destacados</h2>
+
+  <div class="news-grid">
+    <div class="mini-card">Angular 19 Signals</div>
+    <div class="mini-card">Deep Learning 2026</div>
+    <div class="mini-card">Robots Autónomos</div>
+  </div>
+
+  <!-- NEWSLETTER -->
+  <div class="newsletter">
+    <h2>Newsletter Ejecutiva</h2>
+    <p>Recibe análisis estratégicos cada semana</p>
+
+    <div>
+      <input type="email" placeholder="Correo corporativo">
+      <button class="btn-cyan">Suscribirse</button>
+    </div>
+  </div>
+
+  <section class="cards">
+
+    <div class="card">
+      <h3>🤖 Inteligencia Artificial</h3>
+      <p>
+        Descubre cómo la IA está revolucionando
+        el desarrollo de software moderno.
+      </p>
+      <button class="btn-card">Leer más</button>
+    </div>
+
+    <div class="card">
+      <h3>🅰 Angular 18</h3>
+      <p>
+        Nuevas mejoras en rendimiento y arquitectura
+        para aplicaciones escalables.
+      </p>
+      <button class="btn-card">Leer más</button>
+    </div>
+
+    <div class="card">
+      <h3>⚛ Computación Cuántica</h3>
+      <p>
+        El futuro del hardware y el procesamiento
+        de datos a gran escala.
+      </p>
+      <button class="btn-card">Leer más</button>
+    </div>
+
+  </section>
+  
+</div>
+
+    

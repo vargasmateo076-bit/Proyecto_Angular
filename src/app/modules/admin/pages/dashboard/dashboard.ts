@@ -1,35 +1,45 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms'; // Necesario para el formulario
-import { Router } from '@angular/router';
-import { AuthService } from '../../../../core/services/auth';
-import { NewsService, Noticia } from '../../../../core/services/news';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router'; 
+import { AuthService } from '../../../../core/services/auth.service';
+import { NewsService } from '../../../../core/services/news'; 
+
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './dashboard.html' // Usaremos el archivo HTML para que sea más limpio
+  templateUrl: './dashboard.html',
+  styleUrl: './dashboard.less'
 })
 export class DashboardComponent {
-  private auth = inject(AuthService);
-  private newsService = inject(NewsService);
+  private authService = inject(AuthService);
   private router = inject(Router);
+  public newsService = inject(NewsService);
 
-  // Modelo para la nueva noticia
-  nuevaNoticia: Noticia = { titulo: '', resumen: '', tag: 'IA' };
+  titulo = '';
+  tag = 'IA';
+  resumen = '';
 
-  publicar() {
-    if (this.nuevaNoticia.titulo && this.nuevaNoticia.resumen) {
-      this.newsService.agregarNoticia({ ...this.nuevaNoticia });
-      // Limpiamos el formulario
-      this.nuevaNoticia = { titulo: '', resumen: '', tag: 'IA' };
-      alert('¡Noticia publicada con éxito!');
-    }
+  postear() {
+  if (this.titulo && this.resumen) {
+
+    this.newsService.agregarNoticia({
+  titulo: this.titulo,
+  resumen: this.resumen,
+  tag: this.tag
+});
+
+    this.titulo = '';
+    this.resumen = '';
+    alert('¡Noticia publicada!');
   }
+}
 
   logout() {
-    this.auth.logout();
-    this.router.navigate(['/']);
+    console.log('Cerrando sesión...');
+    this.authService.logout(); 
+    this.router.navigate(['/auth/login']);
   }
 }
