@@ -1,31 +1,65 @@
 import { Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
+
+  private apiUrl = 'http://localhost:3000';
   private currentUser = signal<any>(null);
 
-  constructor() {
+  constructor(private http: HttpClient) {
+
     const saved = localStorage.getItem('user');
-    if (saved) this.currentUser.set(JSON.parse(saved));
+
+    if (saved) {
+      this.currentUser.set(JSON.parse(saved));
+    }
+
   }
 
-  // Soluciona el error en login.ts
+  // LOGIN SIMPLE
   login(user: string, pass: string, role: string): boolean {
-    if (pass === '1234') { 
-      const data = { username: user, role: role };
+
+    if (pass === '1234') {
+
+      const data = {
+        username: user,
+        role: role
+      };
+
       this.currentUser.set(data);
       localStorage.setItem('user', JSON.stringify(data));
+
       return true;
     }
+
     return false;
   }
 
-  // Soluciona el error en landing.ts y user.ts
+  // NEWSLETTER
+  getNewsletter(){
+    return this.http.get<any>('http://localhost:3000/newsletter');
+  }
+
+  // ESTADO LOGIN
+  isLoggedIn(): boolean {
+    return this.currentUser() !== null;
+  }
+
+  getRole(): string {
+    return this.currentUser()?.role || '';
+  }
+
   getUsername(): string {
     return this.currentUser()?.username || 'Invitado';
   }
 
-  isLoggedIn(): boolean { return this.currentUser() !== null; }
-  getRole(): string { return this.currentUser()?.role || ''; }
-  logout() { this.currentUser.set(null); localStorage.removeItem('user'); }
+  // LOGOUT
+  logout() {
+    this.currentUser.set(null);
+    localStorage.removeItem('user');
+  }
+
 }

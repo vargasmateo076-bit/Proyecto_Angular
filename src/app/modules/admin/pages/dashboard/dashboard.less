@@ -1,6 +1,6 @@
 :host {
   display: block;
-  background: #0f172a; // Fondo azul noche profundo
+  background: #0f172a; 
   min-height: 100vh;
   padding: 2rem;
   font-family: 'Inter', sans-serif;
@@ -15,7 +15,6 @@
   margin-bottom: 2rem;
 }
 
-/* BOTONES CON ESTILO PRO */
 .btn-logout, .btn-primary {
   border-radius: 8px;
   font-weight: 600;
@@ -26,7 +25,7 @@
 
 .btn-logout {
   background: #1e293b;
-  color: #f87171; // Rojo suave
+  color: #f87171; 
   border-color: rgba(248, 113, 113, 0.2);
   padding: 8px 16px;
 
@@ -61,19 +60,243 @@ input, select, textarea {
   }
 }
 
-.btn-primary {
-  width: 100%;
-  background: #38bdf8;
-  color: #0f172a;
+
+.btn-primary, 
+.btn-cancel {
   padding: 14px;
-  margin-top: 2rem;
-  font-size: 1rem;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  margin-top: 2rem; 
+}
+
+.btn-primary {
+  background: #38bdf8;
+  color: #0f172a;
+  width: 100%;
 
   &:hover {
     background: #7dd3fc;
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(56, 189, 248, 0.3);
   }
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #94a3b8;
+  border: 1px solid #334155;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    color: #f87171;
+    border-color: #f87171;
+  }
+}
+
+.button-group {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  margin-top: 2rem;
+
+  .btn-primary, 
+  .btn-cancel {
+    flex: 1;        
+    margin-top: 0;  
+    width: auto;    
+  }
+}
+
+
+.list-card {
+  margin-top: 4rem; 
+  h2 {
+    color: #fff;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    border-left: 4px solid #38bdf8;
+    padding-left: 15px;
+  }
+}
+
+.news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem; 
+}
+
+.news-item-admin {
+  background: #1e293b;
+  padding: 1.5rem;
+  border-radius: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: #38bdf8;
+    transform: scale(1.01);
+    background: #243146;
+  }
+
+  .news-info {
+    .tag-badge {
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+    .news-title {
+      margin-top: 10px;
+      color: #f1f5f9;
+      font-size: 1.1rem;
+    }
+  }
+
+  .news-actions {
+    display: flex;
+    gap: 12px;
+
+    button {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.2s;
+    }
+
+    .btn-edit {
+      background: #334155;
+      color: #38bdf8;
+      &:hover { background: #38bdf8; color: #0f172a; }
+    }
+
+    .btn-delete {
+      background: rgba(239, 68, 68, 0.1);
+      color: #f87171;
+      &:hover { background: #ef4444; color: white; }
+    }
+  }
+}
+
+.subscribers-section {
+margin-top: 20px;
+grid-column: span 1; // Se ajusta al grid que ya tienes
+}
+
+.section-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 20px;
+}
+
+.count-badge {
+background: #00d1ff;
+color: #000;
+padding: 4px 12px;
+border-radius: 20px;
+font-weight: bold;
+font-size: 12px;
+}
+
+.subscriber-item {
+display: flex;
+justify-content: space-between;
+align-items: center;
+padding: 12px;
+background: rgba(255, 255, 255, 0.03);
+border: 1px solid rgba(255, 255, 255, 0.05);
+border-radius: 8px;
+margin-bottom: 10px;
+}
+
+.sub-info {
+display: flex;
+align-items: center;
+gap: 12px;
+}
+
+.gmail-circle {
+background: #ea4335;
+color: white;
+width: 32px;
+height: 32px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: bold;
+font-size: 14px;
+}
+
+.sub-email {
+margin: 0;
+color: #fff;
+font-weight: 500;
+font-size: 14px;
+}
+
+.sub-date {
+font-size: 11px;
+color: #94a3b8;
+}
+
+.sub-status {
+font-size: 11px;
+color: #00d1ff;
+text-transform: uppercase;
+letter-spacing: 1px;
+border: 1px solid rgba(0, 209, 255, 0.3);
+padding: 2px 8px;
+border-radius: 4px;
+}
+.newsletter-card {
+  background: #1e1e2f;
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 20px;
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.newsletter-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ff4da6;
+}
+
+.newsletter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.newsletter-item {
+  background: #2a2a40;
+  padding: 10px 15px;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.newsletter-item:hover {
+  background: #3a3a55;
+  transform: scale(1.02);
 }

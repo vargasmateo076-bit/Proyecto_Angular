@@ -5,33 +5,152 @@
   </header>
 
   <main class="dashboard-grid">
+
     <section class="form-card">
-      <h2>Publicar Nueva Noticia</h2>
 
-      <form (ngSubmit)="postear()">  
-        <div class="form-group">
-          <label for="titulo">Título de la noticia</label>
-          <input id="titulo" type="text" [(ngModel)]="titulo" name="titulo" required placeholder="Ej: Nueva IA en 2026">
-        </div>
+      <!-- FORMULARIO CREAR -->
+      <div *ngIf="!noticiaEditando">
+        <h2>Publicar Nueva Noticia</h2>
 
-        <div class="form-group">
-          <label for="categoria">Categoría</label>
-          <select id="categoria" [(ngModel)]="tag" name="tag">
-            <option value="IA">Inteligencia Artificial</option>
-            <option value="Web">Desarrollo Web</option>
-            <option value="Hardware">Hardware</option>
-            <option value="loT">Internet de las Cosas</option>
-            <option value="TIC">Tecnología de la Información y Comunicaciones</option>
-          </select>
-        </div>
+        <form (ngSubmit)="postear()">
 
-        <div class="form-group">
-          <label for="resumen">Resumen del contenido</label>
-          <textarea id="resumen" [(ngModel)]="resumen" name="resumen" rows="5" required></textarea>
-        </div>
+          <div class="form-group">
+            <label for="titulo">Título de la noticia</label>
+            <input id="titulo"
+              type="text"
+              [(ngModel)]="titulo"
+              name="titulo"
+              required
+              placeholder="Ej: Nueva IA en 2026">
+          </div>
 
-        <button type="submit" class="btn-primary">POSTEAR AHORA</button>
-      </form>
+          <div class="form-group">
+            <label for="categoria">Categoría</label>
+            <select id="categoria"
+              [(ngModel)]="tag"
+              name="tag">
+
+              <option value="IA">Inteligencia Artificial</option>
+              <option value="Web">Desarrollo Web</option>
+              <option value="Hardware">Hardware</option>
+              <option value="IoT">Internet de las Cosas</option>
+              <option value="TIC">Tecnología de la Información y Comunicaciones</option>
+
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="resumen">Resumen del contenido</label>
+            <textarea id="resumen"
+              [(ngModel)]="resumen"
+              name="resumen"
+              rows="5"
+              required></textarea>
+          </div>
+
+          <button type="submit" class="btn-primary">
+            POSTEAR AHORA
+          </button>
+
+        </form>
+      </div>
+
+
+      <!-- FORMULARIO EDITAR -->
+      <div *ngIf="noticiaEditando">
+
+        <h2>Editando: {{ noticiaEditando.titulo }}</h2>
+
+        <form (ngSubmit)="guardarEdicion()">
+
+          <div class="form-group">
+            <label for="editTitulo">Nuevo Título</label>
+            <input id="editTitulo"
+              type="text"
+              [(ngModel)]="noticiaEditando.titulo"
+              name="editTitulo"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="editResumen">Nuevo Resumen</label>
+            <textarea id="editResumen"
+              [(ngModel)]="noticiaEditando.descripcion"
+              name="editResumen"
+              rows="5"
+              required></textarea>
+          </div>
+
+          <div class="button-group">
+            <button type="submit" class="btn-primary">
+              GUARDAR CAMBIOS
+            </button>
+
+            <button type="button"
+              (click)="cancelarEdicion()"
+              class="btn-cancel">
+              CANCELAR
+            </button>
+          </div>
+
+        </form>
+      </div>
+
     </section>
+
+
+    <!-- LISTA DE NOTICIAS -->
+    <section class="list-card">
+      <h2>Noticias Publicadas</h2>
+
+      <div class="news-list">
+
+        <p *ngIf="noticias.length === 0" class="empty-msg">
+          No hay noticias disponibles.
+        </p>
+
+        <div *ngFor="let n of noticias" class="news-item-admin">
+
+          <div class="news-info">
+            <span class="tag-badge">{{ n.tag }}</span>
+            <p class="news-title">
+              <strong>{{ n.titulo }}</strong>
+            </p>
+          </div>
+
+          <div class="news-actions">
+            <button (click)="iniciarEdicion(n)" class="btn-edit">
+              Editar
+            </button>
+
+            <button (click)="eliminar(n.id)" class="btn-delete">
+              Eliminar
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <section class="newsletter-card">
+
+  <h2 class="newsletter-title">📩 Correos del Newsletter</h2>
+
+  <p *ngIf="emails.length === 0">
+    No hay correos registrados
+  </p>
+
+  <div class="newsletter-list">
+
+    <div *ngFor="let e of emails" class="newsletter-item">
+      {{e.email}}
+    </div>
+
+  </div>
+
+</section>
+    
+
   </main>
 </div>

@@ -1,29 +1,36 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class NewsService {
 
-  private _noticias = signal<any[]>(
-    JSON.parse(localStorage.getItem('noticias') || '[]')
-  );
+  private http = inject(HttpClient);
+  private apiUrl = 'http://localhost:3000/noticias';
 
-  noticias = this._noticias.asReadonly();
+  getNoticias() {
+    return this.http.get<any[]>(this.apiUrl);
+  }
 
   agregarNoticia(noticia: any) {
-
-    const nuevaNoticia = {
-      id: Date.now(),
-      ...noticia,
-      fecha: new Date(),
-      autor: 'Admin'
-    };
-
-    this._noticias.update(prev => {
-      const actualizadas = [nuevaNoticia, ...prev];
-      localStorage.setItem('noticias', JSON.stringify(actualizadas));
-      return actualizadas;
-    });
+    return this.http.post(this.apiUrl, noticia);
   }
+
+  eliminarNoticia(id: any) {
+  const cleanId = String(id);
+  return this.http.delete(`${this.apiUrl}/${cleanId}`);
 }
+
+  actualizarNoticia(noticia: any) {
+  const id = String(noticia.id); 
+  return this.http.put(`${this.apiUrl}/${id}`, noticia);
+}
+
+suscribirNewsletter(email: string) {
+return this.http.post('http://localhost:3000/newsletter', { email });
+}
+
+getSuscriptores() {
+return this.http.get('http://localhost:3000/newsletter');
+}
+}
+
